@@ -1,8 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import router from './router/router'
 import store from './store'
+import hui from 'h_ui/dist/h_ui.min.js'
+import 'h_ui/dist/h_ui.min.css'
+import './style/main.scss'
 
+Vue.use(hui)
 Vue.config.productionTip = false
 
 new Vue({
