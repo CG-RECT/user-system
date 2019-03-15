@@ -8,6 +8,11 @@ import table from '../views/user/service/table'
 import  titleDiv from  '../views/user/service/TitleDiv'
 import  zcpz from  '../views/user/service/zcpz'
 import  zhyjzbx from  '../views/user/service/zhyjzbx'
+import  hypz from  '../views/user/service/hypz'
+import  ggpz from  '../views/user/service/ggpz'
+import  jyhz from  '../views/user/service/jyhz'
+import  zhglqy from  '../views/user/service/zhglqy'
+import  ccmxqy from  '../views/user/service/ccmxqy'
 
 Vue.use(Router)
 
@@ -62,6 +67,30 @@ export default new Router({
       path: '/zhyjzbx',
       name: 'zhyjzbx',
       component: zhyjzbx
+    },
+    {
+      path: '/hypz',
+      name: 'hypz',
+      component: hypz
+    },
+    {
+      path: '/ggpz',
+      name: 'ggpz',
+      component: ggpz
+    },
+    {
+      path: '/jyhz',
+      name: 'jyhz',
+      component: jyhz
+    },
+    {
+      path: '/zhglqy',
+      name: 'zhglqy',
+      component: zhglqy
+    },{
+      path: '/ccmxqy',
+      name: 'ccmxqy',
+      component: ccmxqy
     }
   ]
 })

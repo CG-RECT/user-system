@@ -1,5 +1,5 @@
 <template>
-  <h-line :data="chartData" :settings="chartSettings" :colors="chartColors" :legend="legend" :yAxis="yAxis" height="300px"></h-line>
+  <h-line :data="chartData" :colors="chartColors" :legend="legend" :yAxis="yAxis" height="300px"></h-line>
 </template>
 
 <script>
@@ -18,12 +18,21 @@
             { '日期': '2018-02-15', '组合': 2.5, '基准': 4.3}
           ]
         },
-        chartSettings:{
-            metrics: ['组合', '基准'],
-            dimension: ['日期'],
-        },
+        //chartSettings:{
+           // metrics: ['组合', '基准'],
+            //dimension: ['日期'],
+        //},
         legend: { //图例属性
              x: 'right' //居右显示
+        },
+        xAxis: {
+            axisLine: {
+                onZero: false,
+                lineStyle: {
+                    color: '#006000'
+                }
+            },
+            data: ['2018-01-01','2018-01-12','2018-01-23','2018-02-03','2108-02-14','2018-02-25','2018-03-08']
         },
         yAxis:{
             min:-6.00,

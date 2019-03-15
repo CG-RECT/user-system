@@ -1,16 +1,18 @@
 <template>
-  <div>
-      <h-panel title="资产配置">
+  <div class="hZcpz">
+      <h-panel >
+          <div class="title-div-qy">
+                        <label class="textlang">资产配置</label>
+          </div>
           <h-row type="flex" justify="space-around" class="code-row-bg">
                 <h-col span="24">
-                        <div id="pieChart" style="width:300px;height:150px"></div>
+                        <div id="pieChart" style="width:80%;height:250px"></div>
+                        <!--<h-ring :legend="legend" :series="series" :colors="chartColors" height="250px"></h-ring>-->
                 </h-col>
           </h-row>
           <h-row type="flex" justify="space-around" class="code-row-bg">
                 <h-col span="24">
-                    <div>
                         <h-table stripe :columns="columns1" :data="data1" :size="size" :row-class-name="rowClassName"></h-table>
-                    </div>
                 </h-col>
           </h-row>
       </h-panel>
@@ -25,23 +27,68 @@ export default {
                 columns1: [
                     {
                         title: '资产大类',
-                        key: 'name'
+                        key: 'name',
+                        align: "center",
                     },
                     {
                         title: '净值占比',
-                        key: 'percent'
+                        key: 'percent',
+                        align: "center",
                     },
                     {
                         title: '基准',
-                        key: 'jz'
+                        key: 'jz',
+                        align: "center",
                     },
                     {
                         title: '超配',
-                        key: 'cp'
+                        key: 'cp',
+                        align: "center",
+                        render:(h,params) => {
+                            let val = params.row.cp;
+                            let str = "";
+                            let color = "";
+                            if(val < 0){
+                                str = val;
+                                color = "green";
+                            }else if(val == 0){
+                                str = val;
+                                color = "black";
+                            }else{
+                                str = val;
+                                color = "red";
+                            }
+                            return h("span",{
+                                style: {
+                                    'color':color
+                                }
+                            }, str);
+                        }
                     },
                     {
                         title: '表现',
-                        key: 'bx'
+                        key: 'bx',
+                        align: "center",
+                        render:(h,params) => {
+                            let val = params.row.bx;
+                            let str = "";
+                            let color = "";
+                            if(val < 0){
+                                str = val;
+                                color = "green";
+                            }else if(val == 0){
+                                str = val;
+                                color = "black";
+                            }else{
+                                str = val;
+                                color = "red";
+                            }
+                            return h("span",{
+                                style: {
+                                    'color':color
+                                }
+                            }, str);
+                        }
                     }
                 ],
                 data1: [
@@ -75,6 +122,44 @@ export default {
                     }
                 ],
                 size:'small',
+                notSetWidth: true,
+                autoHeadWidth:true,
+                //图标属性
+                chartColors:[ '#ffdc35',
+                              '#bebebe',
+                              '#d0d0d0', 
+                              '#e0e0e0'], //扇区颜色
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} {d}"
+                },
+                legend: { //图例属性
+                    orient: 'vertical',  //垂直显示
+                    y: 'center',    //延Y轴居中
+                    x: 'right' //居右显示
+                },
+                series: [{
+                    name: "净值占比",
+                    type: "pie",
+                    selectedMode: 'single',
+                    radius: ["20%", "50%"],
+                    label: {
+                    normal: {
+                        show: false
+                    }
+                    },
+                    labelLine: {
+                    normal: {
+                        show: false
+                    }
+                    },
+                    data:  [
+                            { value: 0.6, name: '股票', selected:true},
+                            { value: 0.2, name: '债券' },
+                            { value: 0.1, name: '银行存款' },
+                            { value: 0.1, name: '其他' },
+                            ]
+                }]
             }
     },
     methods:{
@@ -101,7 +186,7 @@ export default {
             name: "净值占比",
             type: "pie",
             selectedMode: 'single',
-            radius: ["20%", "60%"],
+            radius: ["20%", "50%"],
             label: {
               normal: {
                 show: false
@@ -128,18 +213,23 @@ export default {
             }
     },
     mounted() {
-        let date = [
+        /*let date = [
             { value: 0.6, name: '股票', selected:true},
             { value: 0.2, name: '债券' },
             { value: 0.1, name: '银行存款' },
             { value: 0.1, name: '其他' },
-          ];
-          this.initpieChart(date);
+          ];*/
+        this.$http.get("/test/zcpz/ring").then(res =>{
+            let date = res.data;
+            this.initpieChart(date);
+        }).catch(err => {
+            alert("error");
+        })
     } 
 }
 </script>
 <style>
-    
+
 </style>
 
 
