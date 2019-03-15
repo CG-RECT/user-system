@@ -14,7 +14,7 @@ import  zhyjzbx from  '../views/user/service/zhyjzbx'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   linkActiveClass: 'active',
   routes: [
     {
